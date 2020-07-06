@@ -85,3 +85,8 @@ select the script runmenu.sh.
 
 enjoy
 # i'm not responsible on usage you do with this repo, it's for educational purpose only
+
+###### credits
+* P4wnp1 ALOA repo: https://github.com/RoganDawes/P4wnP1_aloa
+* beboxos/P4wnP1_ALOA_OLED_MENU_V2 repo: https://github.com/beboxos/P4wnP1_ALOA_OLED_MENU_V2
+
