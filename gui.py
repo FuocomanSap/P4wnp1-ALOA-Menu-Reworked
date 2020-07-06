@@ -1552,10 +1552,11 @@ def deauther():
     DisplayText("this will work","for 10 second","","","","","")
     try:
         target= target.split(",")
+        print(target[2])
     except:
         displayError()
         return()
-    print(target[2])
+   
 
     #cmd = "airodump-ng -c " + str(target[1] )+" --bssid " + str(target[2]) + " wlan0mon && echo 'finito' "
     ##cmd2 =  "aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
