@@ -32,12 +32,17 @@ and find and set spi section
 * dtparam=spi=on
 
 
+###### Note for i2c: (on gui.py)
 
-###### Note for SPI: (on gui.py)
+ ######  uncomment the "bus = smbus.SMBus(0)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)" line
+ ######  set USER_I2C=1
+ ######  (if ups) set UPS=1
+
+###### Note for SPI: (on gui.py) (urrently set like this)
 
  ######  comment the "bus = smbus.SMBus(0)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)" line
  ######  set USER_I2C=0
- ######  (if you don't have a ups) set UPS=0
+ ######  (if you have a ups) set UPS=1
 
 * chmod +x install.sh update.sh
 * run sh install.sh 
