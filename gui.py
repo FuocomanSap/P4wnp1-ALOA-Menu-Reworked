@@ -303,7 +303,8 @@ def sysinfos():
             displayError()
             return()
         Disk = res.split("'")[1]
-        if(str(IP3)== '\n'):
+        print(str(IP3))
+        if(str(IP3)== '\n\''):
             IP = "refresh the Connection"   
         DisplayText(
             "WIFI: " + IP.split("'")[1],
@@ -1434,6 +1435,14 @@ def getSSID():
             displayError()
             time.sleep(5)
             return()
+        cmd = "kill " + str(res)
+        res = execcmd(cmd)
+        if(res==-1):
+            print("errore nella kill")
+            displayError()
+            time.sleep(5)
+            return()
+
     except:
         displayError()
         time.sleep(5)
@@ -1443,7 +1452,7 @@ def getSSID():
     if(res==-1):
         displayError()
         return()
-    cmd="rm -rf reportAiro* && rm nohup.out"
+    cmd="rm -rf reportAiro* && rm nohup.out && touchedcommand.sh"
     toDEl = execcmd(cmd)
     if(toDEl==-1):
         displayError()
@@ -1459,6 +1468,7 @@ def getSSID():
         res[i]=res[i][-1]+ ","+res[i][3] +","+ res[i][0]
         
     ssidlist=res
+    print("eccomi")
     print(ssidlist)
 
     #----------------------------------------------------------
@@ -1507,8 +1517,7 @@ def getSSID():
             cur = cur + 1
             if cur>maxi-2:
                 cur = maxi-2
-        if GPIO.input(KEY_LEFT_PIN): # button is released
-            menu = 0
+        if not GPIO.input(KEY_LEFT_PIN): # button is released
             return()
         if GPIO.input(KEY_RIGHT_PIN): # button is released
             menu = 1
@@ -1535,7 +1544,7 @@ def deauther():
         return()
     print(target[2])
     
-    cmd="sudo airmon-ng start wlan0 " + str(target[1] )+" && aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
+    cmd=" airodump-ng -c " + str(target[1] )+" --bssid " + str(target[2]) + " wlan0mon  && aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
     print(cmd)
     res = execcmd(cmd)
     if(res==-1):
