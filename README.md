@@ -14,9 +14,14 @@ I updated the code to work with python3.7, fixed some bugs and added new feature
 * nmap on a specific host and save the report
 * update the gui-code via gui-option
 * vulnerability scan (experimental...help me)
-* Deauther(Jammer-like) on Wifi AP, working on
+* Deauther(Jammer-like) on Wifi AP (50 packets, for continuous mode set "-0 0" in the gui.pu/deauther() function"
 * TODO Deauther(Jammer-like) on a specific client
 * TODO others
+
+## known bugs
+* using DEauther breaks WIFI and BLT connections, so you need to restart your Rasp
+* some templates need to be executed 2 times, due to a P4wnp1 bug
+
 
 ## Installation:
 On boot partition edit config.txt to set I2C and SPI to active
