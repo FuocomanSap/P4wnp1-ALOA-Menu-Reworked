@@ -1385,6 +1385,7 @@ def vulnerabilityScan():
     if(res==-1):
         displayError()
         time.sleep(5)
+        return()
     #print(res)
     toSearch = str(res).split("'")[1].split("\\n")
     del toSearch[-1]
@@ -1414,21 +1415,29 @@ def getSSID():
     if(res==-1):
         displayError()
         return()
-    cmd ="airodump-ng wlan0mon -w reportAiro -a &"
+    try:
+        #Popen(['nohup','/bin/bash','/root/BeBoXGui/update.sh'], stdout=open('/dev/null','w'), stderr=open('/dev/null','a'),>
+        Popen(['nohup','/bin/bash','test.sh'],preexec_fn=os.setpgrp)
+        DisplayText("","","wait","","","","")
+        time.sleep(10)
+        cmd = "ps -aux | grep 'airodump-ng wlan0mon -w reportAiro -a-' | head -n 1 | cut -d ' ' -f7"
+        res = execcmd(cmd)
+        if(res==-1):
+            displayError()
+            time.sleep(5)
+            return()
+    except:
+        displayError()
+        time.sleep(5)
+        return()
+    cmd="cat reportAiro-01.csv"
     res = execcmd(cmd)
     if(res==-1):
         displayError()
-        return()
-    DisplayText("","","","wait","","","")
-    time.sleep(5)
-    cmd ="fg && \x03 "
-    res = execcmd(cmd)
-    if(res==-1):
-        displayError()
-        return()
-    cmd="cat reportAiro.txt-01.csv"
-    res = execcmd(cmd)
-    if(res==-1):
+        exit()
+    cmd="rm -rf reportAiro*"
+    toDEl = execcmd(cmd)
+    if(toDEl==-1):
         displayError()
         exit()
     res = str(res).replace("\\r","").split("\\n")
@@ -1441,6 +1450,7 @@ def getSSID():
         del res[i][-1]
         res[i]=res[i][-1]+ ","+res[i][3] +","+ res[i][0]
     ssidlist=res
+
     #----------------------------------------------------------
     listattack=ssidlist
     maxi=len(listattack) #number of records

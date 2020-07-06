@@ -21,3 +21,5 @@
 
 #seleziona un mac e deautha
 #aireplay-ng -0 0(times) -a <mac-SSID-Target> wlan0mon (broadcast version)
+
+#service networking restart && airmon-ng start wlan0 && airmon-ng stop wlan0mon &&  ifconfig wlan0 up
