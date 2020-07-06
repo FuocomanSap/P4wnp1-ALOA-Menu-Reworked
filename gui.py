@@ -1503,7 +1503,7 @@ def getSSID():
             menu = 1
         else: # button is pressed:
             retour = listattack[cur]
-            print(retour)
+            #print(retour)
             return(retour)
         #print(str(cur) + " " + listattack[cur])        #debug
         DisplayText(ligne[0],ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
@@ -1514,6 +1514,7 @@ def getSSID():
 
 def deauther():
     target = getSSID()
+    print(target)
     #name,channel,mac
     DisplayText("this will work","for 10 second","","","",""."")
     target= target.split(",")
