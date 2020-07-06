@@ -667,10 +667,7 @@ def GetTemplateList(type):
 def ApplyTemplate(template,section):
     print(template)
     print(section)
-    while GPIO.input(KEY_LEFT_PIN):
-        answer = 0
-        while answer == 0:
-            DisplayText(
+    DisplayText(
                 "THERE IS A BUG",
                 "u need to",
                 "do this 2 times",
@@ -680,6 +677,10 @@ def ApplyTemplate(template,section):
                 "NO                NO"
                 )
             time.sleep(3)
+    while GPIO.input(KEY_LEFT_PIN):
+        answer = 0
+        while answer == 0:
+            
             DisplayText(
                 "YES              YES",
                 "",
