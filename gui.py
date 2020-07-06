@@ -1496,6 +1496,7 @@ def getSSID():
 
 
 def deauther():
+    getSSID()
     return()
     
         
