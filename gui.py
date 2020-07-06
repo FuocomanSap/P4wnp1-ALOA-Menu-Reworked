@@ -1421,6 +1421,11 @@ def getSSID():
         return()
     DisplayText("","","","wait","","","")
     time.sleep(5)
+    cmd ="fg && \x03 "
+    res = execcmd(cmd)
+    if(res==-1):
+        displayError()
+        return()
     cmd="cat reportAiro.txt-01.csv"
     res = execcmd(cmd)
     if(res==-1):
