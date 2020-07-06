@@ -304,8 +304,8 @@ def sysinfos():
             return()
         Disk = res.split("'")[1]
         print(str(IP3))
-        if(str(IP3)== str('\n\`')):
-            IP = "refresh the Connection"   
+        if(str(IP3)== str('\\n\'')):
+            IP3 = "refresh the Connection"   
         DisplayText(
             "WIFI: " + IP.split("'")[1],
             #str(BATT)
@@ -674,7 +674,7 @@ def ApplyTemplate(template,section):
                 fichier,
                 "bug of P4wnp1",
                 "not mine",
-                "NO                NO"
+                "               "
                 )
     time.sleep(3)
     while GPIO.input(KEY_LEFT_PIN):
