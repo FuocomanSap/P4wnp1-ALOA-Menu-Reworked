@@ -1429,19 +1429,21 @@ def getSSID():
         Popen(['nohup','/bin/bash','touchedcommand.sh'],preexec_fn=os.setpgrp)
         DisplayText("","","wait","","","","")
         time.sleep(10)
-        cmd = "ps -aux | grep 'airodump-ng wlan0mon -w reportAiro -a' | head -n 1 | cut -d ' ' -f7"
-        res = execcmd(cmd)
-        if(res==-1):
-            displayError()
-            time.sleep(5)
-            return()
-        cmd = "kill " + str(res)
-        res = execcmd(cmd)
-        if(res==-1):
-            print("errore nella kill")
-            displayError()
-            time.sleep(5)
-            return()
+        errore = 0
+        while(errore = 0):
+            cmd = "ps -aux | grep 'airodump-ng wlan0mon -w reportAiro -a' | head -n 1 | cut -d ' ' -f7"
+            res = execcmd(cmd)
+            if(res==-1):
+                displayError()
+                time.sleep(5)
+                return()
+            cmd = "kill " + (str(res).split("'")[1])[:-1]
+            res = execcmd(cmd)
+            if(res==-1):
+                print("errore nella kill")
+                displayError()
+                time.sleep(5)
+                errore=1
 
     except:
         displayError()
