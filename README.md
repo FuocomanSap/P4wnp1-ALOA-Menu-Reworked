@@ -86,6 +86,13 @@ select the script runmenu.sh.
 enjoy
 # i'm not responsible on usage you do with this repo, it's for educational purpose only
 
+###### usefull links
+* guide: https://gideonwolfe.com/posts/security/p4wnp1/
+* video guide: https://www.youtube.com/watch?v=s0K-YIL_G5c
+* rasp that I use : https://www.amazon.it/Melopero-Raspberry-Zero-Starter-Kit/dp/B072LWBL37/ref=sr_1_1?__mk_it_IT=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=melopero+raspberry+pi+zero+w+starter+kit&qid=1594075917&s=electronics&sr=1-1
+* oled that I use : https://www.amazon.it/gp/product/B078D6NXFM/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1
+* usb addon that I use : https://www.amazon.it/gp/product/B07BPTPDM5/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1
+
 ###### credits
 * P4wnp1 ALOA repo: https://github.com/RoganDawes/P4wnP1_aloa
 * beboxos/P4wnP1_ALOA_OLED_MENU_V2 repo: https://github.com/beboxos/P4wnP1_ALOA_OLED_MENU_V2
