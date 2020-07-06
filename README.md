@@ -14,7 +14,7 @@ I updated the code to work with python3.7, fixed some bugs and added new feature
 * nmap on a specific host and save the report
 * update the gui-code via gui-option
 * vulnerability scan (experimental...help me)
-* Deauther(Jammer-like) on Wifi AP
+* Deauther(Jammer-like) on Wifi AP, working on
 * TODO Deauther(Jammer-like) on a specific client
 * TODO others
 
