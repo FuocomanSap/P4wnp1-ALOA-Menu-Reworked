@@ -1,4 +1,6 @@
-# variant for Kali-arm
+# variant for Kali-arm with no p4wnp1 aloa
+I couldn't even call it pre-alpha, I just removed the P4wnp1 references.
+If anyone wants to make a good fit, make like it was yours.
 ##### INFOS
 
 This project was born from: https://github.com/beboxos/P4wnP1_ALOA_OLED_MENU_V2, since python2.7 is deprecated and therefore no longer compatible with the libraries in use, I opened a Fork, updated the code to Python3.7 and made a PullRequest.
