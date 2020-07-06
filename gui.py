@@ -1417,8 +1417,13 @@ def getSSID():
         displayError()
         return()
     try:
+        cmd ="touch touchedcommand.sh && echo '#!/bin/bash\nairodump-ng wlan0mon -w reportAiro -a &' > touchedcommand.sh && chmod +x touchedcommand.sh"
+        res = execcmd(cmd)
+        if(res==-1):
+            displayError()
+            return()
         #Popen(['nohup','/bin/bash','/root/BeBoXGui/update.sh'], stdout=open('/dev/null','w'), stderr=open('/dev/null','a'),>
-        Popen(['nohup','/bin/bash','airodump-ng wlan0mon -w reportAiro -a'],preexec_fn=os.setpgrp)
+        Popen(['nohup','/bin/bash','touchedcommand.sh'],preexec_fn=os.setpgrp)
         DisplayText("","","wait","","","","")
         time.sleep(10)
         cmd = "ps -aux | grep 'airodump-ng wlan0mon -w reportAiro -a' | head -n 1 | cut -d ' ' -f7"
@@ -1520,7 +1525,11 @@ def deauther():
     print(target)
     #name,channel,mac
     DisplayText("this will work","for 10 second","","","","","")
-    target= target.split(",")
+    try:
+        target= target.split(",")
+    except:
+        displayError()
+        return()
     print(target[2])
     
     cmd="iwconfig wlan0mon channel" + str(target[1] )+" && aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
