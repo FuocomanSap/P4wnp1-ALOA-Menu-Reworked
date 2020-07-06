@@ -38,7 +38,7 @@ and find and set spi section
  ######  set USER_I2C=1
  ######  (if ups) set UPS=1
 
-###### Note for SPI: (on gui.py) (urrently set like this)
+###### Note for SPI: (on gui.py) (currently set like this)
 
  ######  comment the "bus = smbus.SMBus(0)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)" line
  ######  set USER_I2C=0
