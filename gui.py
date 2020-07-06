@@ -676,7 +676,7 @@ def ApplyTemplate(template,section):
                 "not mine",
                 "NO                NO"
                 )
-            time.sleep(3)
+    time.sleep(3)
     while GPIO.input(KEY_LEFT_PIN):
         answer = 0
         while answer == 0:
