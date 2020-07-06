@@ -671,6 +671,16 @@ def ApplyTemplate(template,section):
         answer = 0
         while answer == 0:
             DisplayText(
+                "THERE IS A BUG",
+                "u need to",
+                "do this 2 times",
+                fichier,
+                "bug of P4wnp1",
+                "not mine",
+                "NO                NO"
+                )
+            time.sleep(3)
+            DisplayText(
                 "YES              YES",
                 "",
                 "",
