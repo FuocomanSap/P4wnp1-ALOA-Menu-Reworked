@@ -302,7 +302,9 @@ def sysinfos():
         if(res==-1):
             displayError()
             return()
-        Disk = res.split("'")[1]   
+        Disk = res.split("'")[1]
+        if(str(IP3)== '\n'):
+            IP = "refresh the Connection"   
         DisplayText(
             "WIFI: " + IP.split("'")[1],
             #str(BATT)
