@@ -1384,7 +1384,7 @@ def update():
         time.sleep(5)
 
 def vulnerabilityScan():
-    DisplayText("Remeber:","Firts u need to","perform an Nmap","and then ","save the output","this is an","experimental feat>
+    DisplayText("Remeber:","Firts u need to","perform an Nmap","and then ","save the output","this is an","experimental feat")
     time.sleep(5)
     DisplayText("","","","Wait","","","")
     selected = FileSelect("/root/BeBoXGui/nmap/",".txt")
