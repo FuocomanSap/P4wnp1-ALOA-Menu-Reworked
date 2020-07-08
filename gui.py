@@ -1293,12 +1293,16 @@ def nmap():
     DisplayText("","","","    wait ","","","")
     
     if(choise==1):
-        cmd = "nmap -Pn -A " + selected
+        cmd = "nmap -Pn -A " + selected + " > " + str(selected) + ".txt"
         ret = execcmd(cmd)
         if(ret==-1):
             displayError()
             return()
-        f = open("nmap/" + str(selected) + ".txt","w+")
+        try:
+            f = open("nmap/" + str(selected) + ".txt","w+")
+        except:
+            displayError()
+            return()
         reportList = str(ret).split("'")[1].split("\\n")
         for line in reportList:
             #print(line + "\\n")
