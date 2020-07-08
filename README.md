@@ -21,6 +21,7 @@ I updated the code to work with python3.7, fixed some bugs and added new feature
 ## known bugs
 * using DEauther breaks WIFI and BLT connections, so you need to restart your Rasp
 * some templates need to be executed 2 times, due to a P4wnp1 bug
+* nmap sometimes crashs
 
 
 ## Installation:
