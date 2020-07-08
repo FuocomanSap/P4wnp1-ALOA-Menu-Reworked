@@ -1384,10 +1384,9 @@ def update():
         time.sleep(5)
 
 def vulnerabilityScan():
-    DisplayText("Remeber:","Firts u need to","perform an Nmap","and then ","save the output","this is an","experimental feature")
+    DisplayText("Remeber:","Firts u need to","perform an Nmap","and then ","save the output","this is an","experimental feat>
     time.sleep(5)
-    DisplayText("","","","this is experimental :C","","","")
-    time.sleep(5)
+    DisplayText("","","","Wait","","","")
     selected = FileSelect("/root/BeBoXGui/nmap/",".txt")
     filePath = "/root/BeBoXGui/nmap/" + selected
     cmd = "cat " + filePath + " |  grep -v Discovered | grep  tcp"
@@ -1396,18 +1395,15 @@ def vulnerabilityScan():
         displayError()
         time.sleep(5)
         return()
-    #print(res)
     toSearch = str(res).split("'")[1].split("\\n")
     del toSearch[-1]
     founded = 0
     for i in toSearch:
-        #print(i)
-        i = i[23:]
-        auxi = i.split(" ")
+        auxi = i.replace("\t"," ").replace("   "," ").replace("  "," ").split(" ")
         print(auxi)
-        i = auxi[0] + " " + auxi[1][:-2]
+        i = str(" ".join(auxi[3:]))
         print("search for: " + i )
-        cmd = "searchsploit " + str(i)
+        cmd = "searchsploit " +"'" +  str(i) +"'"
         res = execcmd(cmd)
         if(res==-1):
             displayError()
@@ -1416,6 +1412,7 @@ def vulnerabilityScan():
             founded +=1
     print(founded)
     DisplayText("","","","founded: " + str(founded) ,"","","")
+    time.sleep(5)
 
 
 def getSSID():
@@ -1558,7 +1555,7 @@ def deauther():
     #cmd = "airodump-ng -c " + str(target[1] )+" --bssid " + str(target[2]) + " wlan0mon && echo 'finito' "
     ##cmd2 =  "aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
     tx1="timeout 2s airodump-ng -c " + str(target[1] )+" --bssid " + str(target[2]) + " wlan0mon"
-    tx2= "aireplay-ng -0 50 -a " + str(target[2]) + " wlan0mon"
+    tx2= "timeout 20s aireplay-ng -0 50 -a " + str(target[2]) + " wlan0mon"
     cmd ="touch touchedcommand.sh && echo '#!/bin/bash\n"+ tx1 +" &' > touchedcommand.sh && chmod +x touchedcommand.sh"
     res = execcmd(cmd)
     if(res==-1):
