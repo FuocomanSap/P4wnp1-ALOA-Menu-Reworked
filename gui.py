@@ -1293,22 +1293,14 @@ def nmap():
     DisplayText("","","","    wait ","","","")
     
     if(choise==1):
-        cmd = "nmap -Pn -A " + selected + " > " + str(selected) + ".txt"
+        cmd = "nmap -Pn -A -v " + selected + " > nmap/" + selected + ".txt"
         ret = execcmd(cmd)
         if(ret==-1):
             displayError()
             return()
-        try:
-            f = open("nmap/" + str(selected) + ".txt","w+")
-        except:
-            displayError()
-            return()
-        reportList = str(ret).split("'")[1].split("\\n")
-        for line in reportList:
-            #print(line + "\\n")
-            f.write(line + "\n")
-        f.close()
-        cmd = "cat " + "nmap/" + selected +".txt | grep tcp"
+        
+        
+        cmd = "cat " + "nmap/" + selected +".txt |  grep -v Discovered | grep  tcp"
         ret = execcmd(cmd)
         if( ret ==-1):
             displayError()
@@ -1398,7 +1390,7 @@ def vulnerabilityScan():
     time.sleep(5)
     selected = FileSelect("/root/BeBoXGui/nmap/",".txt")
     filePath = "/root/BeBoXGui/nmap/" + selected
-    cmd = "cat " + filePath + " | grep tcp"
+    cmd = "cat " + filePath + " |  grep -v Discovered | grep  tcp"
     res = execcmd(cmd)
     if(res==-1):
         displayError()
