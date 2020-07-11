@@ -14,7 +14,7 @@ I updated the code to work with python3.7, fixed some bugs and added new feature
 * nmap on a specific host and save the report
 * update the gui-code via gui-option
 * vulnerability scan (experimental...help me)
-* Deauther(Jammer-like) on Wifi AP (60s, delete "timeout 60s" in the gui.py/deauther() function"
+* Deauther(Jammer-like) on Wifi AP (60s, for continuous mode delete "timeout 60s" in the gui.py/deauther() function"
 * TODO Deauther(Jammer-like) on a specific client
 * TODO others
 
