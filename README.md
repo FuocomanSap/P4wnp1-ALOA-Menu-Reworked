@@ -16,7 +16,8 @@ All rights to the original code are owned by BeboXos.
 * update the gui-code via gui-option
 * vulnerability scan (experimental...help me)
 * Deauther(Jammer-like) on Wifi AP (60s, for continuous mode delete "timeout 60s" in the gui.py/deauther() function"
-* TODO Deauther(Jammer-like) on a specific client
+* Deauther(Jammer-like) on a specific client
+* TODO ArpPoisoning, save sniffed packet.
 * TODO others
 
 ## known bugs
