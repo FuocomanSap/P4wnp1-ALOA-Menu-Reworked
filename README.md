@@ -24,18 +24,14 @@ I updated the code to work with python3.7, fixed some bugs and added new feature
 
 
 ## Installation:
-On boot partition edit config.txt to set I2C and SPI to active
-in termnial you can type 
-* nano /boot/config.txt
 
-find the section far away down and set : 
+* On boot partition edit config.txt to set I2C and SPI to active, in termnial you can type nano /boot/config.txt
 
-* dtparam=i2c_arm=on
-* dtparam=i2c1=on
+ dtparam=i2c_arm=on
+ dtparam=i2c1=on
 
-and find and set spi section 
-
-* dtparam=spi=on
+* and find and set spi section:
+ dtparam=spi=on
 
 
 ###### Note for i2c: (on gui.py)
