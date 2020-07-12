@@ -23,109 +23,6 @@ import smbus2 as smbus
 UPS = 0 # 1 = UPS Lite connected / 0 = No UPS Lite hat
 SCNTYPE = 1  # 1= OLED #2 = TERMINAL MODE BETA TESTS VERSION
 
-def execcmd(cmd):
-    try:
-        return (str(subprocess.check_output(cmd, shell = True )))
-    except:
-        return (-1)
-def execcmdNostr(cmd):
-    try:
-        return ((subprocess.check_output(cmd, shell = True )))
-    except:
-        return (-1)
-
-
-def displayError():
-    DisplayText(
-            "",
-            "",
-            "",
-            "      INTERNAL ERROR",
-            "",
-            "",
-            ""
-            )
-    time.sleep(5) 
-
-def autoKillCommand(tx1,time):
-    
-    tx2= "timeout "+ time + "s" + tx1
-    cmd ="touch touchedcommand.sh && echo '#!/bin/bash\n"+ tx2 +" &' > touchedcommand.sh && chmod +x touchedcommand.sh"
-    res = execcmd(cmd)
-    if(res==-1):
-        displayError()
-        return()
-    Popen(['nohup','/bin/bash','touchedcommand.sh'],preexec_fn=os.setpgrp)
-    DisplayText("","","Executed","","","","")
-    time.sleep(time)
-    #print(cmd)
-    #subprocess.call(["timeout 2s",str(cmd)])
-    ##Popen(['timeout',cmd],preexec_fn=os.setpgrp)
-    cmd="rm touchedcommand.sh"
-    toDEl = execcmd(cmd)
-    if(toDEl==-1):
-        displayError()
-        return(-1)
-    return()
-
-def checklist(_list):
-    listattack=_list
-    maxi=len(listattack) #number of records
-    cur=0
-    retour = ""
-    ligne = ["","","","","","","",""]
-    time.sleep(0.5)
-    while GPIO.input(KEY_LEFT_PIN):
-        #on boucle
-        tok=0
-        if maxi < 7:
-            for n in range(0,7):
-                if n<maxi:
-                    if n == cur:
-                        ligne[n] = ">"+listattack[n]
-                    else:
-                        ligne[n] = " "+listattack[n]
-                else:
-                    ligne[n] = ""
-        else:
-            if cur+7<maxi:
-                for n in range (cur,cur + 7):
-                    if n == cur:
-                        ligne[tok] = ">"+listattack[n]
-                    else:
-                        ligne[tok] = " "+listattack[n]
-                    tok=tok+1
-            else:
-                for n in range(maxi-8,maxi-1):
-                    if n == cur:
-                        ligne[tok] = ">"+listattack[n]
-                    else:
-                        ligne[tok] = " "+listattack[n]                            
-                    tok=tok+1
-        if GPIO.input(KEY_UP_PIN): # button is released
-            menu = 1
-        else: # button is pressed:
-            cur = cur -1
-            if cur<0:
-                cur = 0
-        if GPIO.input(KEY_DOWN_PIN): # button is released
-            menu = 1
-        else: # button is pressed:
-            cur = cur + 1
-            if cur>maxi-2:
-                cur = maxi-2
-        if not GPIO.input(KEY_LEFT_PIN): # button is released
-            return()
-        if GPIO.input(KEY_RIGHT_PIN): # button is released
-            menu = 1
-        else: # button is pressed:
-            retour = listattack[cur]
-            #print(retour)
-            return(retour)
-        #print(str(cur) + " " + listattack[cur])        #debug
-        DisplayText(ligne[0],ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
-        time.sleep(0.1)
-    return("")
 
 
 def readVoltage(bus):
@@ -215,6 +112,107 @@ if SCNTYPE == 1:
         serial = spi(device=0, port=0, bus_speed_hz = 8000000, transfer_size = 4096, gpio_DC = 24, gpio_RST = 25)
 if SCNTYPE == 1:
     device = sh1106(serial, rotate=2) #sh1106
+
+
+def execcmd(cmd):
+    try:
+        return (str(subprocess.check_output(cmd, shell = True )))
+    except:
+        return (-1)
+def execcmdNostr(cmd):
+    try:
+        return ((subprocess.check_output(cmd, shell = True )))
+    except:
+        return (-1)
+def displayError():
+    DisplayText(
+            "",
+            "",
+            "",
+            "      INTERNAL ERROR",
+            "",
+            "",
+            ""
+            )
+    time.sleep(5) 
+def autoKillCommand(tx1,time):
+    
+    tx2= "timeout "+ time + "s" + tx1
+    cmd ="touch touchedcommand.sh && echo '#!/bin/bash\n"+ tx2 +" &' > touchedcommand.sh && chmod +x touchedcommand.sh"
+    res = execcmd(cmd)
+    if(res==-1):
+        displayError()
+        return()
+    Popen(['nohup','/bin/bash','touchedcommand.sh'],preexec_fn=os.setpgrp)
+    DisplayText("","","Executed","","","","")
+    time.sleep(time)
+    #print(cmd)
+    #subprocess.call(["timeout 2s",str(cmd)])
+    ##Popen(['timeout',cmd],preexec_fn=os.setpgrp)
+    cmd="rm touchedcommand.sh"
+    toDEl = execcmd(cmd)
+    if(toDEl==-1):
+        displayError()
+        return(-1)
+    return()
+def checklist(_list):
+    listattack=_list
+    maxi=len(listattack) #number of records
+    cur=0
+    retour = ""
+    ligne = ["","","","","","","",""]
+    time.sleep(0.5)
+    while GPIO.input(KEY_LEFT_PIN):
+        #on boucle
+        tok=0
+        if maxi < 7:
+            for n in range(0,7):
+                if n<maxi:
+                    if n == cur:
+                        ligne[n] = ">"+listattack[n]
+                    else:
+                        ligne[n] = " "+listattack[n]
+                else:
+                    ligne[n] = ""
+        else:
+            if cur+7<maxi:
+                for n in range (cur,cur + 7):
+                    if n == cur:
+                        ligne[tok] = ">"+listattack[n]
+                    else:
+                        ligne[tok] = " "+listattack[n]
+                    tok=tok+1
+            else:
+                for n in range(maxi-8,maxi-1):
+                    if n == cur:
+                        ligne[tok] = ">"+listattack[n]
+                    else:
+                        ligne[tok] = " "+listattack[n]                            
+                    tok=tok+1
+        if GPIO.input(KEY_UP_PIN): # button is released
+            menu = 1
+        else: # button is pressed:
+            cur = cur -1
+            if cur<0:
+                cur = 0
+        if GPIO.input(KEY_DOWN_PIN): # button is released
+            menu = 1
+        else: # button is pressed:
+            cur = cur + 1
+            if cur>maxi-2:
+                cur = maxi-2
+        if not GPIO.input(KEY_LEFT_PIN): # button is released
+            return()
+        if GPIO.input(KEY_RIGHT_PIN): # button is released
+            menu = 1
+        else: # button is pressed:
+            retour = listattack[cur]
+            #print(retour)
+            return(retour)
+        #print(str(cur) + " " + listattack[cur])        #debug
+        DisplayText(ligne[0],ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
+        time.sleep(0.1)
+    return("")
 def DisplayText(l1,l2,l3,l4,l5,l6,l7):
     # simple routine to display 7 lines of text
     if SCNTYPE == 1:
@@ -1401,8 +1399,6 @@ def nmap():
     time.sleep(10)
     #TODO add the vulnerability scan
 
-
-
 def nmapLocal():
     selected = "172.16.0.2"
     choise = 0  
@@ -1492,7 +1488,6 @@ def vulnerabilityScan():
     print(founded)
     DisplayText("","","","founded: " + str(founded) ,"","","")
     time.sleep(5)
-
 
 def getSSID():
     DisplayText("","","wait","","","","")
@@ -1616,8 +1611,6 @@ def getSSID():
         time.sleep(0.1)
     return("")
 
-
-
 def deauther():
     target = getSSID()
     print(target)
@@ -1660,12 +1653,6 @@ def deauther():
         displayError()
         return()
     return()
-
-
-    
-
-        
-    
 
 
 def main():
