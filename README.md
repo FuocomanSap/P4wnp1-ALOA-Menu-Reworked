@@ -25,26 +25,29 @@ I updated the code to work with python3.7, fixed some bugs and added new feature
 
 ## Installation:
 
-* On boot partition edit config.txt to set I2C and SPI to active, in termnial you can type nano /boot/config.txt
+* On boot partition edit config.txt to set I2C and SPI to active (in termnial you can type nano /boot/config.txt)
 
- dtparam=i2c_arm=on
- dtparam=i2c1=on
+edit:
 
-* and find and set spi section:
- dtparam=spi=on
+         dtparam=i2c_arm=on
+         dtparam=i2c1=on
+
+and find and set spi section:
+
+         dtparam=spi=on
 
 
 ###### Note for i2c: (on gui.py)
 
- ######  uncomment the "bus = smbus.SMBus(0)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)" line
- ######  set USER_I2C=1
- ######  (if ups) set UPS=1
+     uncomment the "bus = smbus.SMBus(0)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)" line
+     set USER_I2C=1
+     (if ups) set UPS=1
 
 ###### Note for SPI: (on gui.py) (currently set like this)
 
- ######  comment the "bus = smbus.SMBus(0)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)" line
- ######  set USER_I2C=0
- ######  (if you have a ups) set UPS=1
+    comment the "bus = smbus.SMBus(0)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)" line
+    set USER_I2C=0
+    (if you have a ups) set UPS=1
 
 * chmod +x install.sh update.sh
 * run sh install.sh 
