@@ -1866,6 +1866,38 @@ def arpSpoof():
                 #displayError()
                 errore=1
     
+    cmd1 = "arpspoof -i wlan0 -t "+ victimIP +" "+ routerIp
+    cmd2  = "arpspoof -i wlan0 -t "+ routerIp +" "+ victimIP
+    errore=0
+    while(errore == 0):
+            cmd = "ps -aux | grep '" + cmd1 +"' | head -n 1 | cut -d ' ' -f7"
+            res = execcmd(cmd)
+            if(res==-1):
+                displayError()
+                time.sleep(5)
+                return()
+            cmd = "kill " + (str(res).split("'")[1])[:-2]
+            #print(cmd)
+            res = execcmd(cmd)
+            if(res==-1):
+                #print("errore nella kill")
+                #displayError()
+                errore=1
+    errore=0
+    while(errore == 0):
+            cmd = "ps -aux | grep '" + cmd2 +"' | head -n 1 | cut -d ' ' -f7"
+            res = execcmd(cmd)
+            if(res==-1):
+                displayError()
+                time.sleep(5)
+                return()
+            cmd = "kill " + (str(res).split("'")[1])[:-2]
+            #print(cmd)
+            res = execcmd(cmd)
+            if(res==-1):
+                #print("errore nella kill")
+                #displayError()
+                errore=1
     cmd="iptables-legacy -t nat -F"
     ret = execcmd(cmd)
     if(ret==-1):
