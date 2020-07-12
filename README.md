@@ -81,6 +81,8 @@ select the script runmenu.sh.
 * select runmenu.sh
 * select store and type startup
 
+## Improve the code
+* see MANUAL.md
 
 
 enjoy
