@@ -135,9 +135,9 @@ def displayError():
             ""
             )
     time.sleep(5) 
-def autoKillCommand(tx1,time):
+def autoKillCommand(tx1,t):
     
-    tx2= "timeout "+ time + "s" + tx1
+    tx2= "timeout "+ str(t) + "s" + tx1
     cmd ="touch touchedcommand.sh && echo '#!/bin/bash\n"+ tx2 +" &' > touchedcommand.sh && chmod +x touchedcommand.sh"
     res = execcmd(cmd)
     if(res==-1):
@@ -145,7 +145,7 @@ def autoKillCommand(tx1,time):
         return()
     Popen(['nohup','/bin/bash','touchedcommand.sh'],preexec_fn=os.setpgrp)
     DisplayText("","","Executed","","","","")
-    time.sleep(time)
+    time.sleep(t)
     #print(cmd)
     #subprocess.call(["timeout 2s",str(cmd)])
     ##Popen(['timeout',cmd],preexec_fn=os.setpgrp)

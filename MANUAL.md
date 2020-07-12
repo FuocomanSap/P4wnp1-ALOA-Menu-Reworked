@@ -14,7 +14,7 @@ example:
 
 
 
-* autoKillCommand(tx1,time), execute the command "tx1" for "time" seconds, return -1 if error, no output otherwise. Usefull for command thaht dosent write any output such as AIRODUMP or HTOP. 
+* autoKillCommand(tx1,t), execute the command "tx1" for "t" seconds, return -1 if error, no output otherwise. Usefull for command thaht dosent write any output such as AIRODUMP or HTOP. 
 * checklist(_list), shows a selection menu for a given list of entry, return the selected entry.
 
 # Add a new menu/submenu
