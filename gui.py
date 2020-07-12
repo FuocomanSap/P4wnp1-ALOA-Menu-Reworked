@@ -334,7 +334,7 @@ def switch_menu(argument):
         39: "_TRIGGER ACTIONS",
         40: "_NETWORK",
         41: "_",
-        42: "_deprecated,see HIDScripts",
+        42: "_ArpSpoofing",
         43: "_",
         44: "_",
         45: "_",
