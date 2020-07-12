@@ -316,13 +316,13 @@ def switch_menu(argument):
 def about():
     # simple sub routine to show an About
     DisplayText(
-        "  : P4wnP1 A.L.O.A :",
+        " : P4wnP1 A.L.O.A :",
         "P4wnP1 (c) @Mame82",
         "V 1.0",
         "This GUI is developed",
-        "       by BeBoX",
-        "contact :",
-        "depanet@gmail.com"
+        "Fuocoman",
+        "TY BeBoXoS for the",
+        "OriginalCore Code"
         )
     while GPIO.input(KEY_LEFT_PIN):
         #wait
@@ -380,7 +380,7 @@ def sysinfos():
             displayError()
             return()
         Disk = res.split("'")[1]
-        print(str(IP3))
+        #print(str(IP3))
         if(str(IP3)== str('\\n\'')):
             IP3 = "refresh the Connection"   
         DisplayText(
