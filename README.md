@@ -10,7 +10,7 @@ All rights to the original code are owned by BeboXos.
 
 ## what's new
 * I updated the code to work with python3.7, fixed some bugs and added new features.
-* see MANUAL.md for improving
+* new functions to make easier improving the code,see MANUAL.md
 * hosts discovery
 * nmap on a specific host and save the report
 * update the gui-code via gui-option
