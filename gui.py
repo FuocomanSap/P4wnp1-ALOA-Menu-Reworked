@@ -319,10 +319,10 @@ def about():
         " : P4wnP1 A.L.O.A :",
         "P4wnP1 (c) @Mame82",
         "V 1.0",
-        "This GUI is developed",
+        "This GUI is improved by",
         "Fuocoman",
-        "TY BeBoXoS for the",
-        "OriginalCore Code"
+        "Original Code by",
+        "BeBoXoS"
         )
     while GPIO.input(KEY_LEFT_PIN):
         #wait
