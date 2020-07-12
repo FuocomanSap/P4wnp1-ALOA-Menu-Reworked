@@ -9,7 +9,8 @@ If BeboXos returns to his repo this will be closed, and i hope so.
 All rights to the original code are owned by BeboXos.
 
 ## what's new
-I updated the code to work with python3.7, fixed some bugs and added new features.
+* I updated the code to work with python3.7, fixed some bugs and added new features.
+* see MANUAL.md for improving
 * hosts discovery
 * nmap on a specific host and save the report
 * update the gui-code via gui-option
@@ -50,7 +51,7 @@ and find and set spi section:
     (if you have a ups) set UPS=1
 
 * chmod +x install.sh update.sh
-* run sh install.sh 
+* run sh install.sh,
 the script will automatically install all the files needed
 
 
