@@ -5,10 +5,12 @@
 * displayError()
 
 example:
-ret=execcmd("hostname -I")
-if(ret==-1):
-    displayError()
-    return()
+
+    ret=execcmd("hostname -I")
+    if(ret==-1):
+        displayError()    
+        return()
+
 
 
 * autoKillCommand(tx1,time), execute the command "tx1" for "time" seconds, return -1 if error, no output otherwise. Usefull for command thaht dosent write any output such as AIRODUMP or HTOP. 
