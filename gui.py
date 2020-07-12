@@ -149,7 +149,7 @@ def autoKillCommand(tx1,time):
     #print(cmd)
     #subprocess.call(["timeout 2s",str(cmd)])
     ##Popen(['timeout',cmd],preexec_fn=os.setpgrp)
-    cmd="rm touchedcommand.sh"
+    cmd="rm nohup.out && rm touchedcommand.sh"
     toDEl = execcmd(cmd)
     if(toDEl==-1):
         displayError()
@@ -213,6 +213,20 @@ def checklist(_list):
         DisplayText(ligne[0],ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
         time.sleep(0.1)
     return("")
+def displayMsg(msg,t):
+    DisplayText(
+            "",
+            "",
+            "",
+            msg,
+            "",
+            "",
+            ""
+            )
+    time.sleep(t) 
+
+
+
 def DisplayText(l1,l2,l3,l4,l5,l6,l7):
     # simple routine to display 7 lines of text
     if SCNTYPE == 1:
@@ -235,6 +249,10 @@ def DisplayText(l1,l2,l3,l4,l5,l6,l7):
             print(l7)
 def shell(cmd):
     return(subprocess.check_output(cmd, shell = True ))
+
+
+
+
 def switch_menu(argument):
     switcher = {
     0: "_  P4wnP1 A.L.O.A",
@@ -263,7 +281,7 @@ def switch_menu(argument):
         23: "_Nmap",
         24: "_Vulnerability Scan",
         25: "_Deauther-Bcast",
-        26: "_",
+        26: "_Deauther-Client",
         27: "_",
         28: "_Send to oled group",
         29: "_",
@@ -1490,6 +1508,7 @@ def vulnerabilityScan():
     time.sleep(5)
 
 def getSSID():
+    #return [name,channel,mac]
     DisplayText("","","wait","","","","")
     #list wifi APs
     cmd ="airmon-ng start wlan0 && airmon-ng start wlan0mon"
@@ -1655,6 +1674,42 @@ def deauther():
     return()
 
 
+def selectFromCat(cmd,outputFile):
+    return()
+
+def deautherClient():
+    ###select the AP
+    displayMsg("Select the AP",3)
+    selectedAP=getSSID()
+    #name,channel,mac
+    if(not selectedAP):
+        displayError()
+        return()
+    cmd = " airodump-ng -d " + selectedAP[2] + " -c " + selectedAP[1] + " wlan0mon -w result"
+    if(autoKillCommand(cmd,20)==-1):
+        displayError()
+        return()
+    cmd="cat result-01.csv"
+    ret= execcmd(cmd)
+    if(ret==-1):
+        displayError()
+        return()
+    ret = str(ret).replace("\\r","").split("\\n")
+    toRemove=ret.index("Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs")
+    ret=ret[toRemove+1:-1]
+    for i in range(0,len(ret)):
+        ret[i] = ret[i].split(",")[0]
+    selectedtarget = checklist(ret)   
+    print(selectedtarget)
+    
+    cmd = "rm -rf result*"
+    ret = execcmd(cmd)
+    if(ret==-1):
+        displayError()
+        return()
+    return()
+
+
 def main():
     socketCreate()
     socketBind()
@@ -1751,7 +1806,9 @@ while 1:
                 if curseur == 4:
                     vulnerabilityScan()  
                 if curseur == 5:
-                    deauther()     
+                    deauther()
+                if curseur == 6:
+                    deautherClient()     
             if page == 28:
                     #trigger section
                 if curseur == 1:

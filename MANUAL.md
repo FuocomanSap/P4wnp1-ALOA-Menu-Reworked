@@ -3,6 +3,7 @@
 * execcmd(cmd), execute the command, return -1 if error, str(shell output) otherwise
 * execcmdNostr(cmd), execute the command, return -1 if error, shell output otherwise
 * displayError()
+* displayMsg(msg,t), shows a short "msg" message for "t" seconds
 
 example:
 
