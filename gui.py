@@ -1737,7 +1737,7 @@ def deautherClient():
         displayError()
         return()
     print(tx2)
-    if(autoKillCommand(tx2,10)==-1):
+    if(autoKillCommand(tx2,30)==-1):
         displayError()
         return()
     displayMsg("Done",4)
