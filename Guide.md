@@ -1,4 +1,4 @@
-# Basci command
+# Basic command
 
 * execcmd(cmd), execute the command, return -1 if error, str(shell output) otherwise
 * execcmdNostr(cmd), execute the command, return -1 if error, shell output otherwise
