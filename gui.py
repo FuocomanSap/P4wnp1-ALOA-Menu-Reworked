@@ -171,6 +171,38 @@ def autoKillCommand(tx1,t):
                 time.sleep(5)
                 errore=1
     return(True)
+def killCommand(cmd):
+    errore=0
+    while(errore == 0):
+            cmd = "ps -aux | grep '"+ cmd +"' | head -n 1 | cut -d ' ' -f7"
+            res = execcmd(cmd)
+            if(res==-1):
+                displayError()
+                time.sleep(5)
+                return()
+            cmd = "kill " + (str(res).split("'")[1])[:-2]
+            #print(cmd)
+            res = execcmd(cmd)
+            if(res==-1):
+                #print("errore nella kill")
+                #displayError()
+                errore=1
+    errore=0
+    while(errore == 0):
+            cmd = "ps -aux | grep '"+ cmd +"' | head -n 1 | cut -d ' ' -f8"
+            res = execcmd(cmd)
+            if(res==-1):
+                displayError()
+                time.sleep(5)
+                return()
+            cmd = "kill " + (str(res).split("'")[1])[:-2]
+            #print(cmd)
+            res = execcmd(cmd)
+            if(res==-1):
+                #print("errore nella kill")
+                #displayError()
+                errore=1
+    return()
 
 def autoKillCommandNoKill(tx1,t):
     
@@ -1822,69 +1854,10 @@ def arpSpoof():
             uscire=1
         displayMsg("press right to exit",0.2)
     
-    errore=0
-    while(errore == 0):
-            cmd = "ps -aux | grep dsniff | head -n 1 | cut -d ' ' -f7"
-            res = execcmd(cmd)
-            if(res==-1):
-                displayError()
-                time.sleep(5)
-                return()
-            cmd = "kill " + (str(res).split("'")[1])[:-2]
-            #print(cmd)
-            res = execcmd(cmd)
-            if(res==-1):
-                #print("errore nella kill")
-                #displayError()
-                errore=1
-    errore=0
-    while(errore == 0):
-            cmd = "ps -aux | grep urlsnarf | head -n 1 | cut -d ' ' -f7"
-            res = execcmd(cmd)
-            if(res==-1):
-                displayError()
-                time.sleep(5)
-                return()
-            cmd = "kill " + (str(res).split("'")[1])[:-2]
-            #print(cmd)
-            res = execcmd(cmd)
-            if(res==-1):
-                #print("errore nella kill")
-                #displayError()
-                errore=1
-    errore=0
-    while(errore == 0):
-            cmd = "ps -aux | grep mitm | head -n 1 | cut -d ' ' -f7"
-            res = execcmd(cmd)
-            if(res==-1):
-                displayError()
-                time.sleep(5)
-                return()
-            cmd = "kill " + (str(res).split("'")[1])[:-2]
-            #print(cmd)
-            res = execcmd(cmd)
-            if(res==-1):
-                #print("errore nella kill")
-                #displayError()
-                errore=1
-    
-    cmd1 = "arpspoof -i wlan0 -t "+ str(victimIP) +" "+ str(routerIp)
-    cmd2  = "arpspoof -i wlan0 -t "+ str(routerIp) +" "+ str(victimIP)
-    errore=0
-    while(errore == 0):
-            cmd = "ps -aux | grep arpspoof | head -n 1 | cut -d ' ' -f7"
-            res = execcmd(cmd)
-            if(res==-1):
-                displayError()
-                time.sleep(5)
-                return()
-            cmd = "kill " + (str(res).split("'")[1])[:-2]
-            #print(cmd)
-            res = execcmd(cmd)
-            if(res==-1):
-                #print("errore nella kill")
-                #displayError()
-                errore=1
+    killCommand("dsniff")
+    killCommand("urlsnarf")
+    killCommand("mitm")
+    killCommand("arpspoof")
     
     cmd="iptables-legacy -t nat -F"
     ret = execcmd(cmd)
