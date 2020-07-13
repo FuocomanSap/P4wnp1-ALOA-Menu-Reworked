@@ -1773,6 +1773,7 @@ def arpSpoof():
     myTime= 86400
     displayMsg("select target",3)
     victimIP=hostselect()
+    displayMsg("Please Wait",1)
     cmd = "sysctl -w net.ipv4.ip_forward=1"
     ret = execcmd(cmd)
     if(ret==-1):
