@@ -1812,7 +1812,7 @@ def arpSpoof():
     if(autoKillCommandNoKill(cmdMIMT,myTime)==-1):
         displayError()
         return()
-
+    time.sleep(10)
     uscire=0
     while (uscire==0):
         if GPIO.input(KEY_RIGHT_PIN): # button is released
@@ -1871,7 +1871,7 @@ def arpSpoof():
     cmd2  = "arpspoof -i wlan0 -t "+ str(routerIp) +" "+ str(victimIP)
     errore=0
     while(errore == 0):
-            cmd = "ps -aux | grep '" + cmd1 +"' | head -n 1 | cut -d ' ' -f7"
+            cmd = "ps -aux | grep arpspoof | head -n 1 | cut -d ' ' -f7"
             res = execcmd(cmd)
             if(res==-1):
                 displayError()
@@ -1884,21 +1884,7 @@ def arpSpoof():
                 #print("errore nella kill")
                 #displayError()
                 errore=1
-    errore=0
-    while(errore == 0):
-            cmd = "ps -aux | grep '" + cmd2 +"' | head -n 1 | cut -d ' ' -f7"
-            res = execcmd(cmd)
-            if(res==-1):
-                displayError()
-                time.sleep(5)
-                return()
-            cmd = "kill " + (str(res).split("'")[1])[:-2]
-            #print(cmd)
-            res = execcmd(cmd)
-            if(res==-1):
-                #print("errore nella kill")
-                #displayError()
-                errore=1
+    
     cmd="iptables-legacy -t nat -F"
     ret = execcmd(cmd)
     if(ret==-1):
