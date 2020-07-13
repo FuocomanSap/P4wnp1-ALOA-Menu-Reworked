@@ -1784,7 +1784,7 @@ def arpSpoof():
     if(res==-1):
         displayError()
         return()
-    routerIp = str(res).split("'")[1]
+    routerIp = (str(res).split("'")[1])[:-2]
     print(routerIp)
     print(victimIP)
     victimIP = 0
