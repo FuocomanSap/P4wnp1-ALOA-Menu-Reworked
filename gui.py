@@ -1857,6 +1857,7 @@ def arpSpoof():
     killCommand("urlsnarf")
     killCommand("mitm")
     killCommand("arpspoof")
+    killCommand("arpspoof")
     
     cmd="iptables-legacy -t nat -F"
     ret = execcmd(cmd)
