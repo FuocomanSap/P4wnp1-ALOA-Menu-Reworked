@@ -17,7 +17,7 @@ All rights to the original code are owned by BeboXos.
 * vulnerability scan (experimental...help me)
 * Deauther(Jammer-like) on Wifi AP (60s, for continuous mode delete "timeout 60s" in the gui.py/deauther() function"
 * Deauther(Jammer-like) on a specific client
-* working on ArpPoisoning, saving HttpUrls, HttpUserPass,HttpsUrls, Images. 
+* ArpPoisoning, saving HttpUrls, HttpUserPass,HttpsUrls, Mails.Output in the current directory (working on)
 * TODO others
 
 ## known bugs
