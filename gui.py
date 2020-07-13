@@ -1823,7 +1823,7 @@ def arpSpoof():
     
     errore=0
     while(errore == 0):
-            cmd = "ps -aux | grep dsnif | head -n 1 | cut -d ' ' -f8"
+            cmd = "ps -aux | grep dsniff | head -n 1 | cut -d ' ' -f7"
             res = execcmd(cmd)
             if(res==-1):
                 displayError()
@@ -1838,7 +1838,7 @@ def arpSpoof():
                 errore=1
     errore=0
     while(errore == 0):
-            cmd = "ps -aux | grep urlsnarf | head -n 1 | cut -d ' ' -f8"
+            cmd = "ps -aux | grep urlsnarf | head -n 1 | cut -d ' ' -f7"
             res = execcmd(cmd)
             if(res==-1):
                 displayError()
