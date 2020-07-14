@@ -14,8 +14,22 @@ example:
 
 
 
-* autoKillCommand(tx1,t), execute the command "tx1" for "t" seconds, return -1 if error, no output otherwise. Usefull for command thaht dosent write any output such as AIRODUMP or HTOP. 
+* autoKillCommand(tx1,t), execute the command "tx1" for "t" seconds,it also kills the process return -1 if error, no output otherwise. Usefull for command thaht dosent write any output such as AIRODUMP or HTOP. 
+* autoKillCommandNoKill(tx1,t), execute the command "tx1" for "t" seconds,not kills the process return -1 if error, no output otherwise. Usefull if u want to kill the process before the time "t".
+* killCommand(cmd), kills ALL the commands that contains "cmd", ps -aux | grep cmd  | head -n 1 | cut -d ' ' -f7
 * checklist(_list), shows a selection menu for a given list of entry, return the selected entry.
+* waitingLoop(msg), display a message "msg" and waits ultil the user will press "right"
+
+example:
+
+    cmdMail = "mailsnarf -i wlan0 > Mail"+str(victimIP)+".mbox"
+    if(autoKillCommandNoKill(cmdMail,myTime)==-1):
+        displayError()
+        return()
+    time.sleep(10)
+    waitingLoop("press right to exit")      
+    killCommand("mailsnarf")
+
 
 # Add a new menu/submenu
 * on the switch_menu(argument) function add 7 new entrys.

@@ -222,7 +222,15 @@ def autoKillCommandNoKill(tx1,t):
         displayError()
         return(-1)
     return(1)
-     
+
+def waitingLoop(msg):
+    uscire=0
+    while (uscire==0):
+        if GPIO.input(KEY_RIGHT_PIN): # button is released
+            menu = 1
+        else: # button is pressed:
+            uscire=1
+        displayMsg("msg",0.2)    
 
 def checklist(_list):
     listattack=_list
