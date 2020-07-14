@@ -11,9 +11,9 @@ All rights to the original code are owned by BeboXos.
 ## what's new
 * I updated the code to work with python3.7, fixed some bugs and added new features.
 * new functions to make easier improving the code,see MANUAL.md
+* update the gui-code via gui-option
 * hosts discovery
 * nmap on a specific host and save the report
-* update the gui-code via gui-option
 * vulnerability scan (experimental...help me)
 * Deauther(Jammer-like) on Wifi AP (60s, for continuous mode delete "timeout 60s" in the gui.py/deauther() function"
 * Deauther(Jammer-like) on a specific client
