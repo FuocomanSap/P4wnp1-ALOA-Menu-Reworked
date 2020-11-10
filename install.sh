@@ -1,22 +1,18 @@
-#!/bin/sh 
+#!/bin/bash 
 echo "Install Luma.core drivers"
 apt update --fix-missing
 apt install python3.7-dev python3-pip libfreetype6-dev libjpeg-dev dsniff mitmproxy -y
 pip3 install --upgrade luma.oled
 pip3 install --upgrade luma.core
-echo "Create directory"
-mkdir /root/BeBoXGui/
+echo "Create directories"
+mkdir -p /root/BeBoXGui/{images,nmap}
 echo "Copying files"
 cp *.py /root/BeBoXGui/
-mkdir /root/BeBoXGui/images/
-cd images
-cp * /root/BeBoXGui/images/
+cp images/* /root/BeBoXGui/images/
 echo "Copying run script in local P4wnP1 script"
-cd ..
 cp scripts/runmenu.sh /usr/local/P4wnP1/scripts/
 chmod +x /usr/local/P4wnP1/scripts/runmenu.sh
 cp update.sh /root/BeBoXGui/
-mkdir /root/BeBoXGui/nmap
 chmod +x /root/BeBoXGui/update.sh
 echo "All files are ready"
 echo "to run with P4wnP1 boot"
