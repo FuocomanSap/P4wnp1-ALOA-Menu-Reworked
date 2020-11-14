@@ -15,7 +15,7 @@ example:
 
 
 * autoKillCommand(tx1,t), execute the command "tx1" for "t" seconds,it also kills the process return -1 if error, no output otherwise. Usefull for command thaht dosent write any output such as AIRODUMP or HTOP. 
-* autoKillCommandNoKill(tx1,t), execute the command "tx1" for "t" seconds,not kills the process return -1 if error, no output otherwise. Usefull if u want to kill the process before the time "t".
+* autoKillCommandNoKill(tx1,t), execute the command "tx1" for "t" seconds,not kills the process return -1 if error, no output otherwise. Usefull if u want to kill the process before the time "t"...in other words, i use this command when i want to exit a long task before the time "t", usefull if you need only a part of an output
 * killCommand(cmd), kills ALL the commands that contains "cmd", example: cmd="ps -aux | grep cmd  | head -n 1 | cut -d ' ' -f7"
 * checklist(_list), shows a selection menu for a given list of entry, return the selected entry.
 * waitingLoop(msg), display a message "msg" and waits ultil the user will press "right"
