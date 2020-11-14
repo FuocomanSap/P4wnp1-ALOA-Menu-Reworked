@@ -52,7 +52,7 @@ and find and set spi section:
     (if you have a ups) set UPS=1
 
 * chmod +x install.sh update.sh
-* run sh install.sh,
+* run bash install.sh,
 the script will automatically install all the files needed
 
 
