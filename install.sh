@@ -5,7 +5,8 @@ apt install python3.7-dev python3-pip libfreetype6-dev libjpeg-dev dsniff mitmpr
 pip3 install --upgrade luma.oled
 pip3 install --upgrade luma.core
 echo "Create directories"
-mkdir -p /root/BeBoXGui/{images,nmap}
+mkdir -p /root/BeBoXGui/images
+mkdir -p /root/BeBoXGui/nmap
 echo "Copying files"
 cp *.py /root/BeBoXGui/
 cp images/* /root/BeBoXGui/images/
