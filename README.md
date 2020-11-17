@@ -1,7 +1,7 @@
 ##### INFOS
 
 This project was born from: https://github.com/beboxos/P4wnP1_ALOA_OLED_MENU_V2, since python2.7 is deprecated and therefore no longer compatible with the libraries in use, I opened a Fork, updated the code to Python3.7 and made a PullRequest.
- 
+
 Since the original repo seems to be no longer maintained, I decided to open a new one with the updates made, so that everyone can take advantage of this fantastic project of https://github.com/beboxos again.
 
 If BeboXos returns to his repo this will be closed, and i hope so.
@@ -62,13 +62,13 @@ the script will automatically install all the files needed
 
 you can edit to set to your hat if different
 * GPIO
-* KEY_UP_PIN     : 6, 
-* KEY_DOWN_PIN   : 19, 
-* KEY_LEFT_PIN   : 5, 
-* KEY_RIGHT_PIN  : 26, 
-* KEY_PRESS_PIN  : 13, 
-* KEY1_PIN       : 21, 
-* KEY2_PIN       : 20, 
+* KEY_UP_PIN     : 6,
+* KEY_DOWN_PIN   : 19,
+* KEY_LEFT_PIN   : 5,
+* KEY_RIGHT_PIN  : 26,
+* KEY_PRESS_PIN  : 13,
+* KEY1_PIN       : 21,
+* KEY2_PIN       : 20,
 * KEY3_PIN       : 16
 
 
@@ -99,4 +99,3 @@ enjoy
 ###### credits
 * P4wnp1 ALOA repo: https://github.com/RoganDawes/P4wnP1_aloa
 * beboxos/P4wnP1_ALOA_OLED_MENU_V2 repo: https://github.com/beboxos/P4wnP1_ALOA_OLED_MENU_V2
-
