@@ -48,7 +48,7 @@ example:
                 if curseur == 1:
                     page = 56
                 if curseur == 7:
-                    page = update()
+                    update()
 
 # Add a new submenu
 * on the switch_menu(argument) function add 7 new entrys.
@@ -64,5 +64,5 @@ example:
 ###### new (sub)menus section
             if (page == 56): 
                 if curseur == 1:
-                    page = nmapLocal()
+                    nmapLocal()
                
