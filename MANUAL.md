@@ -34,7 +34,7 @@ example:
 # Add a new menu/submenu
 * on the switch_menu(argument) function add 7 new entrys.
 example:
-###### newmenu
+###### new menu
         49: "_WIRED THINGS",
         50: "_newsubmenu2",
         51: "_newsubmenu3",
@@ -43,7 +43,7 @@ example:
         54: "_newsubmenu6",
         55: "_UpdateOledMenu",
 * on the main() funciton add:
-###### new menus section
+###### new menus section (56 refers to the submenu called "\_WIRED THINGS",while update() refers to "\_UpdateOledMenu"_)
             if (page == 49): 
                 if curseur == 1:
                     page = 56
@@ -53,7 +53,7 @@ example:
 # Add a new submenu
 * on the switch_menu(argument) function add 7 new entrys.
 example:
-###### newsections
+###### new sections (the example refers to the submenu called "WIRED THINGS"
         56: "_Nmap 172.16.0.2",
         57: "_",
         58: "_",
@@ -61,7 +61,7 @@ example:
         60: "_",
         61: "_",
         62: "_",
-###### new menus section
+###### new (sub)menus section
             if (page == 56): 
                 if curseur == 1:
                     page = nmapLocal()
