@@ -1,3 +1,6 @@
+
+![alt text](https://github.com/FuocomanSap/P4wnp1-ALOA-Menu-Reworked/blob/master/images/IMG_0206.JPG?raw=true)
+
 ##### INFOS
 
 This project was born from: https://github.com/beboxos/P4wnP1_ALOA_OLED_MENU_V2, since python2.7 is deprecated and therefore no longer compatible with the libraries in use, I opened a Fork, updated the code to Python3.7 and made a PullRequest.
