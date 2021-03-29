@@ -30,7 +30,7 @@ All rights to the original code are owned by BeboXos.
 
 ## Installation:
 
-* On boot partition edit config.txt to set I2C and SPI to active (in termnial you can type nano /boot/config.txt)
+* On boot partition edit config.txt to set I2C and SPI to active (in termnial you can type: nano /boot/config.txt)
 
 edit:
 
@@ -40,7 +40,7 @@ edit:
 and find and set spi section:
 
          dtparam=spi=on
-
+* Download the current repo: wget https://github.com/FuocomanSap/P4wnp1-ALOA-Menu-Reworked.git
 
 ###### Note for i2c: (on gui.py)
 
