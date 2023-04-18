@@ -2,8 +2,8 @@
 echo "Install Luma.core drivers"
 apt update --fix-missing
 apt install python3.7-dev python3-pip libfreetype6-dev libjpeg-dev dsniff mitmproxy -y
-pip3 install --upgrade luma.oled
-pip3 install --upgrade luma.core
+apt install --upgrade python3-luma.oled
+apt install --upgrade python3-luma.core
 echo "Create directories"
 mkdir -p /root/BeBoXGui/{images,nmap}
 echo "Copying files"
